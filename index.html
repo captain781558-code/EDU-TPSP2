@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังข้อสอบ - แหล่งรวมข้อสอบสำหรับทุกวิชา</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>📚 คลังรวบรวมข้อสอบ</h1>
+        <p>แหล่งรวมข้อสอบเก่าและแนวข้อสอบสำหรับนักเรียน นักศึกษา และผู้ที่สนใจ</p>
+        <button class="menu-toggle" aria-controls="main-nav" aria-expanded="false" onclick="toggleMenu()">
+            &#9776; 
+        </button>
+    </header>
+
+    <nav>
+        <a href="#home">หน้าแรก</a>
+        
+        <a href="math.html">คณิตศาสตร์</a>
+        <a href="sci.html">วิทยาศาสตร์</a>
+        <a href="eng.html">ภาษาอังกฤษ</a>
+        <a href="thai.html">ภาษาไทย</a>
+    </nav>
+
+    <img src="img/White and Grey Modern Gadget Product Desktop Prototype (1).png" alt="ยินดีต้อนรับ" class="resposive-gif">
+
+    <div class="container">
+        
+        <section id="home" class="exam-section">
+            <button class="accordion-header active" onclick="toggleAccordion('home-content')">
+                <h2>🎉 ยินดีต้อนรับสู่คลังข้อสอบ</h2>
+                <span class="accordion-icon"></span>
+            </button>
+            <div id="home-content" class="accordion-content active">
+                <p>ค้นหาและดาวน์โหลดข้อสอบที่คุณต้องการเพื่อเตรียมความพร้อมสำหรับการสอบ</p>  
+            </div>
+        </section>
+        
+    </div>
+
+    <footer>
+        <p>&copy; 2025 คลังรวบรวมข้อสอบ. สงวนลิขสิทธิ์</p>
+        <div class="authors">
+            <p>ผู้จัดทำ:</p>
+            <p>
+                **1. นายธัญวิสิฏฐ์ กำไรทรัพย์ ** |
+                **2. นายณัฐชกร ควรประเสริฐ ** |
+                **3. นางสาวศิรดา สังข์เมือง **
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ฟังก์ชัน Hamburger Menu
+        function toggleMenu() {
+            var nav = document.querySelector('nav');
+            nav.classList.toggle('open');
+            
+            var button = document.querySelector('.menu-toggle');
+            var isExpanded = button.getAttribute('aria-expanded') === 'true' || false;
+            button.setAttribute('aria-expanded', !isExpanded);
+        }
+        
+        // ฟังก์ชัน Accordion
+        function toggleAccordion(id) {
+            var content = document.getElementById(id);
+            var header = content.previousElementSibling; 
+
+            // ตรวจสอบว่าเนื้อหาถูกซ่อนอยู่หรือไม่
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                header.classList.remove('active');
+                content.style.maxHeight = null;
+            } else {
+                // ปิด Accordion อื่นๆ ก่อน 
+                var allContents = document.querySelectorAll('.accordion-content');
+                var allHeaders = document.querySelectorAll('.accordion-header');
+                
+                allContents.forEach(item => {
+                    if (item.id !== id) {
+                        item.classList.remove('active');
+                        item.style.maxHeight = null;
+                    }
+                });
+                allHeaders.forEach(item => {
+                     if (item !== header) {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // เปิด Accordion ที่ถูกคลิก
+                content.classList.add('active');
+                header.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px"; 
+            }
+        }
+
+        // กำหนดให้ส่วนต้อนรับเปิดอยู่เสมอเมื่อโหลด
+        document.addEventListener('DOMContentLoaded', function() {
+            var homeContent = document.getElementById('home-content');
+            if (homeContent) {
+                homeContent.classList.add('active');
+                homeContent.style.maxHeight = homeContent.scrollHeight + "px";
+                homeContent.previousElementSibling.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
